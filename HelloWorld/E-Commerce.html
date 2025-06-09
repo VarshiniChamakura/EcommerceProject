@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyShop - Modern Apparel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #008080;
+            --secondary-color: #4a4a4a;
+            --accent-color: #f0a500;
+            --light-bg: #f9f9f9;
+            --white-color: #ffffff;
+            --border-color: #e0e0e0;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+            color: var(--secondary-color);
+            line-height: 1.7;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+        header p {
+            font-size: 1.05em;
+            opacity: 0.9;
+        }
+        nav {
+            background-color: var(--white-color);
+            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        nav .nav-links a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            font-size: 1em;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        nav .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        nav .nav-links a:hover::after {
+            width: 100%;
+        }
+        nav .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        .cart {
+            font-size: 1em;
+            font-weight: 500;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+        }
+        .cart .cart-icon {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+        nav .user-actions {
+            display: flex;
+            align-items: center;
+        }
+        nav .nav-action-link {
+            margin-left: 20px;
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            font-size: 1em;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        nav .nav-action-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        nav .nav-action-link:hover::after {
+            width: 100%;
+        }
+        nav .nav-action-link:hover {
+            color: var(--primary-color);
+        }
+        section.main-content {
+            padding: 50px 0;
+        }
+        .section-title {
+            text-align: center;
+            font-family: 'Roboto Slab', serif;
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 30px;
+        }
+        .product {
+            background-color: var(--white-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .product img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .product h3 {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: var(--secondary-color);
+            font-weight: 700;
+            flex-grow: 1;
+        }
+        .product p.price {
+            font-size: 1.1em;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .product button {
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            padding: 10px 18px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            align-self: center;
+        }
+        .product button:hover {
+            background-color: #d48c00;
+            transform: scale(1.03);
+        }
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-align: center;
+            padding: 30px 10px;
+            margin-top: 50px;
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        .cart.cart-updated-neutral {
+            transform: scale(1.05);
+            color: var(--primary-color);
+            transition: transform 0.1s ease-in-out, color 0.1s ease-in-out;
+        }
+    </style>
+
+    <script>
+        let cartCount = 0;
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').textContent = cartCount;
+            const cartElement = document.querySelector('.cart');
+            cartElement.classList.add('cart-updated-neutral');
+            setTimeout(() => {
+                cartElement.classList.remove('cart-updated-neutral');
+            }, 300);
+        }
+    </script>
+
+</head>
+<body>
+
+    <header>
+        <h1>EasyShop</h1>
+        <p>Modern Apparel for Everyone</p>
+    </header>
+
+    <nav>
+        <div class="nav-content container">
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Men's</a>
+                <a href="#">Women's</a>
+                <a href="#">Accessories</a>
+                <a href="#">Sale</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="user-actions">
+                <span class="cart"><span class="cart-icon">🛍️</span> Cart: <span id="cart-count">0</span></span>
+                <a href="#" class="nav-action-link">Sign In</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="main-content container">
+        <h2 class="section-title">New Arrivals</h2>
+        <div class="products">
+            <div class="product">
+                <img src="https://www.jeanswest.com.au/dw/image/v2/BDXX_PRD/on/demandware.static/-/Sites-jeanswest-master-catalog/default/dw6b8ff68a/images/WTO-15646/WTO-15646_01_IM_01_Classic-Crew-Neck-Tee_Black.jpg?sw=488&sh=652" alt="Classic Crew Neck Tee">
+                <h3>Classic Crew Neck Tee</h3>
+                <p class="price">₹899</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/originals/e8/d9/8e/e8d98e17ff6703d42c3292b40d8a4877.jpg" alt="Vintage Denim Jacket">
+                <h3>Vintage Denim Jacket</h3>
+                <p class="price">₹1,499</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://images.lee.com/is/image/Lee/4633215-HERO?$KDP-XXLARGE$" alt="Comfort Fit Trousers">
+                <h3>Comfort Fit Trousers</h3>
+                <p class="price">₹1,799</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Minimalist Sneakers">
+                <h3>Minimalist Sneakers</h3>
+                <p class="price">₹2,199</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Classic Aviators Sunglasses">
+                <h3>Classic Aviators</h3>
+                <p class="price">₹799</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://images-static.nykaa.com/media/catalog/product/5/0/508f1e590148KD03_11.jpg" alt="Modern Wrist Watch">
+                <h3>Modern Wrist Watch</h3>
+                <p class="price">₹3,599</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+             <div class="product">
+                <img src="https://i.pinimg.com/736x/ad/6f/7b/ad6f7bdc18202244e08ad9e6c1c4588f--canvas-backpacks-school-backpacks.jpg" alt="Durable Canvas Backpack">
+                <h3>Durable Canvas Backpack</h3>
+                <p class="price">₹1,999</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/originals/1f/8e/5d/1f8e5d3c95a0b9a82cb1fe40e1dedea3.jpg" alt="Comfort Knit Beanie">
+                <h3>Comfort Knit Beanie</h3>
+                <p class="price">₹649</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 EasyShop. All rights reserved. Made with ❤️</p>
+    </footer>
+
+</body>
+</html>
